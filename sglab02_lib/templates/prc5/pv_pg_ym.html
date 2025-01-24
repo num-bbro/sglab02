@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block body %}
+โหลดจังหวัด {{pvnm}}
+<div>
+    <img src="/p54/pv_png_ym/{{pvnm}}/{{ym}}"/>
+</div>
+<div>
+prov: {{pvnm}}
+ym: {{ym}}
+<a href="/p54/pv_pg_sub_map/{{pvnm}}" target="map"> map</a>
+
+</div>
+<div>
+<a href="/p54/pv_pg_ym/{{pvnm}}/Y">YR</a>
+<a href="/p54/pv_pg_ym/{{pvnm}}/M1">M1</a>
+<a href="/p54/pv_pg_ym/{{pvnm}}/M2">M2</a>
+<a href="/p54/pv_pg_ym/{{pvnm}}/M3">M3</a>
+<a href="/p54/pv_pg_ym/{{pvnm}}/M4">M4</a>
+<a href="/p54/pv_pg_ym/{{pvnm}}/M5">M5</a>
+<a href="/p54/pv_pg_ym/{{pvnm}}/M6">M6</a>
+<a href="/p54/pv_pg_ym/{{pvnm}}/M7">M7</a>
+<a href="/p54/pv_pg_ym/{{pvnm}}/M8">M8</a>
+<a href="/p54/pv_pg_ym/{{pvnm}}/M9">M9</a>
+<a href="/p54/pv_pg_ym/{{pvnm}}/M10">M10</a>
+<a href="/p54/pv_pg_ym/{{pvnm}}/M11">M11</a>
+<a href="/p54/pv_pg_ym/{{pvnm}}/M12">M12</a>
+</div>
+<div>
+{% for dt in dts %}
+<a href="/p54/pv_pg_ym/{{pvnm}}/{{dt}}">{{dt}}</a>
+{% endfor %}
+</div>
+<div>
+
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+</style>    
+<table>
+    <tr>
+        <th>สถานี</th>
+        <th>ชื่อไทย</th>
+        <th>ชื่ออังกฤษ</th>
+        <th>หม้อแปลง</th>
+        <th>สายป้อน</th>
+        <th>กำลัง</th>
+        <th>link</th>
+        <th>ตำแหน่ง</th>
+    </tr>
+{% for sb in subs %}
+    <tr>
+        <td>{{sb.0}}</td>
+        <td>{{sb.1}}</td>
+        <td>{{sb.2}}</td>
+        <td>{{sb.3}}</td>
+        <td>{{sb.4}}</td>
+        <td>{{sb.5}}</td>
+        <td><a href="/p54/sb_pg_ym/{{sb.0}}/{{ym}}" target="sub map">link</a></td>
+        <td><a href="{{sb.6}}" target="sub map">gmap</a></td>
+    </tr>
+{% endfor %}
+</table>    
+
+</div>
+{% endblock %}

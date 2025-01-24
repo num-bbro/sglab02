@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block body %}
+สถานีไฟฟ้า {{sbid}}
+<div>
+    <img src="/p54/sb_png_ym/{{sbid}}/{{ym}}"/>
+</div>
+<div>
+รหัสสถานี: {{sbid}}
+ช่วงเวลา: {{ym}}
+
+</div>
+<div>
+<a href="/p54/sb_pg_ym/{{sbid}}/Y">YR</a>
+<a href="/p54/sb_pg_ym/{{sbid}}/M1">M1</a>
+<a href="/p54/sb_pg_ym/{{sbid}}/M2">M2</a>
+<a href="/p54/sb_pg_ym/{{sbid}}/M3">M3</a>
+<a href="/p54/sb_pg_ym/{{sbid}}/M4">M4</a>
+<a href="/p54/sb_pg_ym/{{sbid}}/M5">M5</a>
+<a href="/p54/sb_pg_ym/{{sbid}}/M6">M6</a>
+<a href="/p54/sb_pg_ym/{{sbid}}/M7">M7</a>
+<a href="/p54/sb_pg_ym/{{sbid}}/M8">M8</a>
+<a href="/p54/sb_pg_ym/{{sbid}}/M9">M9</a>
+<a href="/p54/sb_pg_ym/{{sbid}}/M10">M10</a>
+<a href="/p54/sb_pg_ym/{{sbid}}/M11">M11</a>
+<a href="/p54/sb_pg_ym/{{sbid}}/M12">M12</a>
+</div>
+<div>
+{% for dt in dts %}
+<a href="/p54/sb_pg_ym/{{sbid}}/{{dt}}">{{dt}}</a>
+{% endfor %}
+</div>
+
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+</style>
+    
+<table>
+    <tr>
+        <th>สายป้อน</th>
+        <th>โหลด</th>
+        <th>MAP</th>
+    </tr>
+{% for fd in feeds %}
+    <tr>
+        <td>{{fd}}</td>
+        <td><a href="/p54/fd_pg_ym/{{fd}}/Y" target="FD_LOAD">feeder load</a></td>
+        <td><a href="/p54/fd_pg_map/{{fd}}" target="FD_MAP">feeder map</a></td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}

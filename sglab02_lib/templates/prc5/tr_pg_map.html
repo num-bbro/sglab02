@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block body %}
+มิเตอร์ใต้หม้อแปลง {{trid}}
+<div>
+<style>
+img {max-width: 100%; height: auto;}
+.imagemap {position: relative;}
+.imagemap img {display: block;}
+.imagemap .area {display: block; position: absolute; transition: box-shadow 0.15s ease-in-out;}
+.imagemap .area:hover {box-shadow: 0px 0px 1vw rgba(0,0,0,0.5);}
+</style>
+<img src="/p54/tr_png_map/{{fdid}}/{{trid}}"  usemap="#image-map"/>
+{{ pop }}
+</div>
+<div>
+    fdid: {{fdid}}
+    trid: {{trid}}
+</div>
+
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+</style>
+<table>
+    <tr>
+        <th>id</th>
+        <th>ph</th>
+        <th>offc</th>
+        <th>e2</th>
+        <th>e5</th>
+        <th>x</th>
+        <th>y</th>
+        <th>gmap</th>
+    </tr>
+{% for mt in meters %}
+    <tr>
+        <td>{{mt.meter_id}}</td>
+        <td>{{mt.meter_phase}}</td>
+        <td>{{mt.meter_office}}</td>
+        <td>{{mt.e2}}</td>
+        <td>{{mt.e5}}</td>
+        <td>{{mt.x}}</td>
+        <td>{{mt.y}}</td>
+        {% if mt.gm.len()>0 %}
+        <td><a href="{{mt.gm}}" target="gmap">gmap</a></td>
+        {% endif %}
+    </tr>
+{% endfor %}
+</table>
+    
+    
+{% endblock %}

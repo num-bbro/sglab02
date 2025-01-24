@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}{{pvnm}}{% endblock %}
+{% block body %}
+สถานีไฟฟ้า จังหวัด {{pvnm}}
+<div>
+    <img src="../pv_png_sub_map/{{pvnm}}"/>
+</div>
+<div>
+prov: {{pvnm}}
+<a href="../pv_pg_ym/{{pvnm}}/Y" target="map">load 2022</a>
+</div>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+</style>    
+<table>
+    <tr>
+        <th>สถานี</th>
+        <th>ชื่อไทย</th>
+        <th>ชื่ออังกฤษ</th>
+        <th>หม้อแปลง</th>
+        <th>สายป้อน</th>
+        <th>กำลัง</th>
+        <th>link</th>
+        <th>ตำแหน่ง</th>
+    </tr>
+{% for sb in subs %}
+    <tr>
+        <td>{{sb.0}}</td>
+        <td>{{sb.1}}</td>
+        <td>{{sb.2}}</td>
+        <td>{{sb.3}}</td>
+        <td>{{sb.4}}</td>
+        <td>{{sb.5}}</td>
+        <td><a href="../sb_pg_ym/{{sb.0}}/Y" target="sub map">link</a></td>
+        <td><a href="{{sb.6}}" target="sub map">gmap</a></td>
+    </tr>
+{% endfor %}
+</table>
+
+{% endblock %}

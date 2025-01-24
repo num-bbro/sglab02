@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block body %}
+หม้อแปลงใต้สายป้อน {{fdid}}
+<div>
+<style>
+img {max-width: 100%; height: auto;}
+.imagemap {position: relative;}
+.imagemap img {display: block;}
+.imagemap .area {display: block; position: absolute; transition: box-shadow 0.15s ease-in-out;}
+.imagemap .area:hover {box-shadow: 0px 0px 1vw rgba(0,0,0,0.5);}
+</style>
+<img src="../../fe_tr_png_map/{{fdid}}/{{trid}}" usemap="#image-map"/>
+{{ pop }}
+</div>
+<div>
+feeder: {{fdid}}
+transformer: {{trid}}
+<a href="../../fd_pg_ym/{{fdid}}/Y">link</a>
+</div>
+
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+</style>
+    
+<table>
+    <tr>
+        <th>no</th>
+        <th>ID</th>
+        <th>kVA</th>
+        <th>own</th>
+        <th>1เฟส</th>
+        <th>3เฟส</th>
+        <th>link</th>
+        <th>gmap</th>
+    </tr>
+{% for tr in trans %}
+    <tr>
+        <td>
+                {{tr.no}}
+        </td>
+        {% if tr.tx_id==trid %}
+        <td style="background-color:powderblue;">
+        {% else %}
+        <td>
+        {% endif %}
+            <a href="../../fe_tr_pg_map/{{fdid}}/{{tr.tx_id}}">
+                {% if tr.tx_id==trid %}
+                <b>
+                {% endif %}
+                {{tr.tx_id}}
+                {% if tr.tx_id==trid %}
+                </b>
+                {% endif %}
+            </a>
+        {% if tr.tx_id==trid %}
+        </td>
+        {% else %}
+        </td>
+        {% endif %}
+
+        <td>{{tr.tx_power}}</td>
+        <td>{{tr.tx_own}}</td>
+        <td>{{tr.mt_1_ph}}</td>
+        <td>{{tr.mt_3_ph}}</td>
+        <td><a href="../../tr_pg_map/{{fdid}}/{{tr.tx_id}}" target="TR_MAP">map</a></td>
+        {% if tr.gm.len()>0 %}
+        <td><a href="{{tr.gm}}" target="gmap">gmap</a></td>
+        {% endif %}
+    </tr>
+{% endfor %}
+</table>
+    
+{% endblock %}

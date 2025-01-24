@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}ทุกจังหวัด{% endblock %}
+{% block body %}
+<style>
+.tt1 {font-size:1vw; font-weight: bold; text-decoration: underline;}
+.tx1 {font-size:1vw;}
+.tt2 {font-size:2vw; font-weight: bold; text-decoration: underline;}
+.tx2 {font-size:2vw;}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+td {
+    text-align: left;
+}
+</style>
+
+ทุกจังหวัด
+<table>
+    <tr>
+        <th width="10%">no</th>
+        <th width="50%">จังหวัด</th>
+        <th width="20%">load</th>
+        <th width="20%">map</th>
+    </tr>
+    {% for (i,pvnm) in prvs.iter().enumerate() %}
+    <tr>
+        <td>{{i+1}}</td>
+        <td>{{pvnm}}</td>
+        <td>
+            <a href="./pv_pg_ym/{{pvnm}}/Y" target="map">load 2022</a>
+        </td>
+        <td>
+            <a href="./pv_pg_sub_map/{{pvnm}}" target="map"> link</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </table>
+</div>
+{% endblock %}

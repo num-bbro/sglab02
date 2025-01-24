@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block body %}
+<div>
+ยานยนต์ไฟฟ้า
+</div>
+<div>
+
+<style>
+img {max-width: 100%; height: auto;}
+.imagemap {position: relative;}
+.imagemap img {display: block;}
+.imagemap .area {display: block; position: absolute; transition: box-shadow 0.15s ease-in-out;}
+.imagemap .area:hover {box-shadow: 0px 0px 1vw rgba(0,0,0,0.5);}
+</style>
+<table>
+<tr>
+<td width="50%">
+<img src="/p54/ev_png_map/{{yr}}"  usemap="#image-map"/>
+{{ info.pop }}
+</td>
+
+<td style="width: 10%; vertical-align:top;">
+Year: {{yr}}
+<li><a href="/p54/ev_pg_map/2025">2025</a></li>
+<li><a href="/p54/ev_pg_map/2026">2026</a></li>
+<li><a href="/p54/ev_pg_map/2027">2027</a></li>
+<li><a href="/p54/ev_pg_map/2028">2028</a></li>
+<li><a href="/p54/ev_pg_map/2029">2029</a></li>
+<li><a href="/p54/ev_pg_map/2030">2030</a></li>
+<li><a href="/p54/ev_pg_map/2031">2031</a></li>
+<li><a href="/p54/ev_pg_map/2032">2032</a></li>
+<li><a href="/p54/ev_pg_map/2033">2033</a></li>
+<li><a href="/p54/ev_pg_map/2034">2034</a></li>
+<li><a href="/p54/ev_pg_map/2035">2035</a></li>
+<li><a href="/p54/ev_pg_map/2036">2036</a></li>
+<li><a href="/p54/ev_pg_map/2037">2037</a></li>
+<li><a href="/p54/ev_pg_map/2038">2038</a></li>
+<li><a href="/p54/ev_pg_map/2039">2039</a></li>
+</td>
+
+<td style="width: 40%; vertical-align:top;">
+
+<li>รถยนต์ไฟฟ้าใหม่ {{info.pv_ev_la_yr0.separate_with_commas()}}  คัน</li>
+<li>รถยนต์สะสม {{info.pv_ev_ac_no0.separate_with_commas()}} คัน</li>
+<li>กำลังอัดประจุ {{info.pv_ev_mw0.separate_with_commas()}} mw</li>
+<li>พลังงานต่อปี {{info.pv_ev_mwh0.separate_with_commas()}} mwh</li>
+
+<li>รถบรรทุก+บัสใหม่: {{info.pv_et_la_yr0.separate_with_commas()}} คัน</li>
+<li>บรรทุก+บัสสะสม: {{info.pv_et_ac_no0.separate_with_commas()}} คัน</li>
+<li>กำลังอัดประจุ: {{info.pv_et_mw0.separate_with_commas()}} mw</li>
+<li>พลังงานต่อปี: {{info.pv_et_mwh0.separate_with_commas()}} mwh</li>
+
+</td>
+
+</tr>
+</table>
+</div>
+    
+{% endblock %}

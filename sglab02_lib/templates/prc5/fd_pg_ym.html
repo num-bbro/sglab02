@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block body %}
+โหลดสายป้อน {{fdid}}
+<div>
+    <img src="/p54/fd_png_ym/{{fdid}}/{{ym}}"/>
+</div>
+<div>
+รหัสสายป้อน: {{fdid}}
+ช่วง: {{ym}}
+<a href="/p54/fd_pg_map/{{fdid}}">link</a>
+</div>
+<div>
+<a href="/p54/fd_pg_ym/{{fdid}}/Y">YR</a>
+<a href="/p54/fd_pg_ym/{{fdid}}/M1">M1</a>
+<a href="/p54/fd_pg_ym/{{fdid}}/M2">M2</a>
+<a href="/p54/fd_pg_ym/{{fdid}}/M3">M3</a>
+<a href="/p54/fd_pg_ym/{{fdid}}/M4">M4</a>
+<a href="/p54/fd_pg_ym/{{fdid}}/M5">M5</a>
+<a href="/p54/fd_pg_ym/{{fdid}}/M6">M6</a>
+<a href="/p54/fd_pg_ym/{{fdid}}/M7">M7</a>
+<a href="/p54/fd_pg_ym/{{fdid}}/M8">M8</a>
+<a href="/p54/fd_pg_ym/{{fdid}}/M9">M9</a>
+<a href="/p54/fd_pg_ym/{{fdid}}/M10">M10</a>
+<a href="/p54/fd_pg_ym/{{fdid}}/M11">M11</a>
+<a href="/p54/fd_pg_ym/{{fdid}}/M12">M12</a>
+</div>
+<div>
+{% for dt in dts %}
+<a href="/p54/fd_pg_ym/{{fdid}}/{{dt}}">{{dt}}</a>
+{% endfor %}
+</div>
+
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+</style>
+
+<table>
+    <tr>
+        <th>no</th>
+        <th>ID</th>
+        <th>kVA</th>
+        <th>own</th>
+        <th>1เฟส</th>
+        <th>3เฟส</th>
+        <th>link</th>
+        <th>gmap</th>
+    </tr>
+{% for tr in trans %}
+    <tr>
+        <td>{{tr.no}}</td>
+        <td>{{tr.tx_id}}</td>
+        <td>{{tr.tx_power}}</td>
+        <td>{{tr.tx_own}}</td>
+        <td>{{tr.mt_1_ph}}</td>
+        <td>{{tr.mt_3_ph}}</td>
+        <td><a href="/p54/tr_pg_map/{{fdid}}/{{tr.tx_id}}" target="tr_map">link</a></td>
+        {% if tr.gm.len()>0 %}
+        <td><a href="{{tr.gm}}" target="gmap">gmap</a></td>
+        {% endif %}
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}
