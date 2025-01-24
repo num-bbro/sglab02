@@ -1,6 +1,6 @@
 [package]
 name = "sglab02_bin"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2024"
 authors = ["num-bbro <num@bbro.jp>"]
 description = "num sglab02"
