@@ -1,0 +1,15 @@
+resolver = "2"
+
+[workspace]
+members = [
+"sglab02_lib",
+"sglab02_bin",
+]
+
+#[package]
+#name = "sglab02"
+#version = "0.1.0"
+#edition = "2024"
+
+#[dependencies]
+
