@@ -2035,7 +2035,7 @@ dependencies = [
 
 [[package]]
 name = "sglab02_bin"
-version = "0.1.3"
+version = "0.1.5"
 dependencies = [
  "sglab02_lib",
  "tokio",
@@ -2043,7 +2043,7 @@ dependencies = [
 
 [[package]]
 name = "sglab02_lib"
-version = "0.1.4"
+version = "0.1.5"
 dependencies = [
  "ab_glyph",
  "anyhow",
