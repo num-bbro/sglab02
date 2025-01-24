@@ -1,7 +1,7 @@
 [package]
 name = "sglab02_lib"
 version = "0.1.4"
-edition = "2024"
+edition = "2021"
 authors = ["num-bbro <num@bbro.jp>"]
 description = "num sglab02"
 license = "MIT OR Apache-2.0"

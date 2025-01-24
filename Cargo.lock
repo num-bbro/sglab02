@@ -2038,6 +2038,7 @@ name = "sglab02_bin"
 version = "0.1.3"
 dependencies = [
  "sglab02_lib",
+ "tokio",
 ]
 
 [[package]]

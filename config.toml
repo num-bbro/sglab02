@@ -1,0 +1,111 @@
+[criteria]
+#smart_trx_unit_cost = 50000.0 # smart transformer upgrade
+#smart_m1p_unit_cost = 8950.0 # single phase meter price
+#smart_m3p_unit_cost = 14550.0 # three phase meter price
+smart_trx_unit_cost = 15400.0 # smart transformer upgrade
+smart_m1p_unit_cost = 3650.0 # single phase meter price
+smart_m3p_unit_cost = 4500.0 # three phase meter price
+ev_car_all_reg = 500219.0
+ev_car_reg_cnt = 76366.0 # https://www.posttoday.com/smart-city/704704
+#ev_growth_rate_start = 0.10
+#ev_growth_rate_end = 0.30
+ev_growth_rate_start = 0.10
+ev_growth_rate_end = 0.20
+ev_real_charge = 3.0
+
+operate_per_year_m1p = 800.11
+operate_per_year_m3p = 1000.27
+#operate_per_year_dtms = 1400.0 # B per device
+operate_per_year_dtms = 1000.0 # B per device
+operate_per_year_bess = 900000.0	# B per MWH per year
+#operate_per_year_bess = 1026848.92	# B per MWH
+#operate_per_year_bess = 500000.92	# B per MWH
+
+#solar_bess_capacity_ratio = 0.01
+solar_bess_capacity_ratio = 0.1
+#solar_bess_capacity_ratio = 0.25
+meter_plc_per_sim_ratio = 7.0
+
+solar_energy_ratio = 0.05
+bess_energy_max = 20.0
+bess_power_max = 0.10
+ev_batt_power_ratio = 0.05
+solar_time_window = 4.0
+operate_year = 12.0
+
+#bess_sell_per_mwh =  8935440.0 # Baht per MWH per 12 year
+#bess_sell_per_mwh =  15000000.0 # Baht per MWH per 12 year
+bess_sell_per_mwh =  20970000.0 # Baht per MWH per 12 year
+#bess_sell_per_mw =   25941600.0 # Baht per MW per 15 year
+bess_sell_per_mw = 0.0 # Baht per MW per 15 year
+#bess_sell_per_mw =   22000000.0 # Baht per MW per 15 year
+
+energy_sale_price = 4000.0 # Baht per MWH
+
+car_reg_bkk_province = "กรุงเทพมหานคร,นนทบุรี,สมุทรปราการ,ยะลา,นราธิวาส,ปัตตานี,สกลนคร,กาฬสินธุ์,ตรัง,มหาสารคาม,มุกดาหาร,อุดรธานี,พัทลุง"
+car_reg_bkk_percent = "30.0,25.0,15.0,80.0,80.0,80.0,80.0,80.0,80.0,80.0,80.0,80.0,80.0"
+car_reg_to_province = "พระนครศรีอยุธยา,ปทุมธานี,ชลบุรี,นครปฐม,ฉะเชิงเทรา,สมุทรสาคร,ระยอง,ราชบุรี,ปราจีนบุรี"
+car_reg_to_percent = "15.0,15.0,15.0,10.0,10.0,10.0,10.0,8.0,7.0"
+start_year_from_2022 = 2.0
+implement_year = 3.0
+ev_energy_unit_price = 2500.0
+vspp_energy_ratio_start = 0.05
+vspp_energy_ratio_end = 0.10
+energy_growth_rate = 0.05
+
+#ev_real_charge = 3.0
+#evcharger_type1_pw = 0.009 # 7 kw
+evcharger_type1_pw = 0.011 # 11 kw
+infra_invest_last_six_year = 77334 # 22_PEA-wire-plan.pdf
+#infra_invest_per_year = 23876.0 ##
+infra_invest_per_year = 12889.0 ##
+expect_min_firr = -0.12 ##
+##expect_min_firr = 0.12 ##
+
+#smart_trx_unit_cost = 30000.0 # smart transformer upgrade
+#smart_m1p_unit_cost = 7000.0 # single phase meter price
+#smart_m3p_unit_cost = 9000.0 # three phase meter price
+#comm_per_devic_per_month = 12.0 # 12 B per month
+comm_per_devic_per_month = 90.0 # 9 B per month
+
+platform_cost_per_device = 2000.0 # software license
+implement_cost_per_device = 1500.0 #
+operation_cost_per_year_device = 1000.0
+operation_cost_per_year = 1000.0
+
+meter_reading_cost_cut = 5.0 # B per meter
+#economi_discount_rate = 0.10 # 8.0 % per year 
+economi_discount_rate = 0.045 # 8.0 % per year 
+outage_operation_cost_per_hour = 500.0 # 500 B per hour
+loss_in_power_line_rate = 0.01 ## 1% of revenue
+loss_in_phase_balance_rate = 0.01 ## 1% of revenue
+
+#solar_peak_ratio = 0.15
+solar_factor = 6.0
+power_growth_rate = 1.217
+predicted_ev_car = 455400.0
+# charger power in kW
+industry_min_tranx_number = 40
+industry_min_meter_number = 40
+# in kW
+home_min_power = 800
+# in kW
+ev_charger_min_power = 600
+home_min_meter_number = 10
+# PEA FIRR/EIRR
+pea_min_firr = 0.0426
+pea_min_eirr = 0.100
+
+[residence]
+cost_soft_per_device = 3000
+cost_comm_per_device = 1800
+cost_oper_per_device = 2000
+influ_factor = 0.5
+sat_energy = 400000.0
+
+[industry]
+cost_soft_per_device = 3000
+cost_comm_per_device = 1800
+cost_oper_per_device = 2000
+influ_factor = 0.5
+

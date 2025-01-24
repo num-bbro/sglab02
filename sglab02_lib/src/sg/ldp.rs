@@ -13,8 +13,9 @@ use toml;
 
 static BASE: OnceLock<BaseData> = OnceLock::new();
 
-pub fn res(f :&str) -> String {
-	format!("../sgdata/{}", f)
+pub fn res(f: &str) -> String {
+    format!("/mnt/c/Users/choom/Documents/wk33/peasg/dev/sgdata/{}", f)
+    //format!("../sgdata/{}", f)
 }
 
 pub fn base() -> &'static BaseData {
