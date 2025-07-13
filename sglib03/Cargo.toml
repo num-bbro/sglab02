@@ -2,6 +2,12 @@
 name = "sglib03"
 version = "0.1.0"
 edition = "2024"
+authors = ["num-bbro <num@bbro.jp>"]
+description = "num sglab02"
+license = "MIT OR Apache-2.0"
+homepage = "https://bbro.jp"
+repository = "https://github.com/num-bbro/sglab02/tree/main/sglab02_bin"
+
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
