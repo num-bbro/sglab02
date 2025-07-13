@@ -1,11 +1,14 @@
 [package]
 name = "sglab02_lib"
-version = "0.1.5"
+version = "0.1.6"
 edition = "2021"
 #edition = "2024"
 authors = ["num-bbro <num@bbro.jp>"]
 description = "num sglab02"
 license = "MIT OR Apache-2.0"
+homepage = "https://bbro.jp"
+repository = "https://github.com/num-bbro/sglab02/tree/main/sglab02_bin"
+
 
 [dependencies]
 askama = { version = "0.12.1", features = ["serde", "with-axum"] }
