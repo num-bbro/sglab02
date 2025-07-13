@@ -1,0 +1,115 @@
+<html lang="en">
+ <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.A { width:40;  text-align:center;
+  display:inline-block; border-style: ridge; }
+.B { width:90;  
+  display:inline-block; border-style: ridge; }
+.C { width:120;  
+  display:inline-block; border-style: ridge; }
+.D { width:20;  text-align: center;
+  display:inline-block; border-style: ridge; }
+.E { width:20;  text-align: center;
+  display:inline-block; border-style: ridge; }
+.F { width:50;  text-align: center;
+  display:inline-block; border-style: ridge; }
+</style>
+ </head>
+ <body>
+BENEFIT FROM BESS
+<div>
+  <div class="C">PRV</div>
+  <div class="A">SUB</div>
+  <div class="A">TYPE</div>
+  <div class="C">NAME</div>
+  <div class="D">Y1</div>
+  <div class="F">LIM</div>
+  <div class="F">CRI</div>
+  <div class="F">grw0</div>
+  <div class="F">grwa</div>
+  <div class="F">peek</div>
+  <div class="F">en+</div>
+  <div class="F">en-</div>
+  <div class="F">pk-N</div>
+  <div class="F">qbes</div>
+  <div class="F">Bmw</div>
+  <div class="F">Bmwh</div>
+
+  <div class="E">Y2</div>
+  <div class="F">ben1</div>
+  <div class="F">ben2</div>
+  <div class="F">ben3</div>
+  <div class="F">ben4</div>
+  <div class="F">bwmh</div>
+  <div class="F">bcst</div>
+</div>
+{% for (s,t,n,be) in sb_ben %}
+{% let gr = format!("{:.1}", be.grw) %}
+{% let pk = format!("{:.1}", be.peek) %}
+{% let pe = format!("{:.1}", be.p_en) %}
+{% let ne = format!("{:.1}", be.n_en) %}
+{% let gr0 = Pow::pow(1f32 + be.grw0 / 100f32, 15f32) %}
+{% let gra = Pow::pow(1f32 + be.grw / 100f32, 15f32) %}
+{% let ls_pk = format!("{:.1}", be.peek * gr0) %}
+{% let gr0 = format!("{:.1}", be.grw0) %}
+{% let gra = format!("{:.1}", be.grw) %}
+{% let bsp = be.ls_ex_pw %}
+{% let bsp = format!("{:.1}", bsp) %}
+{% let xen = format!("{:.1}", be.ls_ex_en) %}
+{% let axn = format!("{:.1}", be.ac_ex_en/1000f32) %}
+{% let axb = format!("{:.1}", be.ac_ex_be/1000f32) %}
+{% let en0 = format!("{:.1}", be.yi_en/1000f32) %}
+{% let enn = format!("{:.1}", be.yi_en_onp/1000f32) %}
+{% let enf = format!("{:.1}", be.yi_en_ofp/1000f32) %}
+{% let ben = format!("{:.1}", be.ex_ben_onp/1000000f32) %}
+{% let beo = format!("{:.1}", be.ex_ben_ofp/1000000f32) %}
+{% let name = be.name.replace(" ","_") %}
+{% let qbes = format!("{:.1}", be.q_bess) %}
+
+{% let sav = format!("{:.1}", be.be_sub) %}
+{% let dif = format!("{:.1}", be.dec_ben/1000000f32) %}
+{% let qcst = format!("{:.1}", be.q_ben) %}
+{% let xbe = format!("{:.1}", be.ex_ben/1000000f32) %}
+
+{% let bmwh = format!("{:.1}", be.bat_mwh) %}
+{% let bcst = format!("{:.1}", be.bat_cost) %}
+
+<div>
+  <div class="C">{{be.prv}}</div>
+  <a href='{{be.loc}}' target="_blank">
+  <div class="A">{{s}}</div>
+  </a>
+  <a href='{{WEBROOT}}/sb_be_bess1/{{s}}' target=_blank>
+  <div class="A">{{t}}</div>
+  </a>
+  <a href='{{WEBROOT}}/gr_gp1/{{s}}' target="_blank">
+  <div class="C">{{name}}</div>
+  </a>
+  <div class="D">{{be.yr_start}}</div>
+  <div class="F">{{be.trlm}}</div>
+  <div class="F">{{be.trcr}}</div>
+  <div class="F">{{gr0}}</div>
+  <div class="F">{{gra}}</div>
+  <div class="F">{{pk}}</div>
+  <div class="F">{{pe}}</div>
+  <div class="F">{{ne}}</div>
+  <div class="F">{{ls_pk}}</div>
+  <div class="F">{{qbes}}</div>
+  <div class="F">{{bsp}}</div>
+  <div class="F">{{xen}}</div>
+  <div class="E">{{be.be_start}}</div>
+
+  <div class="F">{{sav}}</div>
+  <div class="F">{{dif}}</div>
+  <div class="F">{{qcst}}</div>
+  <div class="F">{{xbe}}</div>
+
+  <div class="F">{{bmwh}}</div>
+  <div class="F">{{bcst}}</div>
+</div>
+{% endfor %}
+</body>
+</html>
+

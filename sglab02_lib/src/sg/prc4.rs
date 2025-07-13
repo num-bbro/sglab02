@@ -1,40 +1,18 @@
 use crate::sg::ldp::base;
 use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
-//use crate::sg::ldp::FeederTranx;
 use std::fs::File;
 use std::fs;
 use std::io::BufReader;
-//use crate::sg::ldp::TranxInfo;
-////use crate::sg::imp::CSVFile;
-//use crate::sg::imp::src_dir;
-//use std::path::PathBuf;
-//use crate::sg::imp::data_dir;
-//use crate::sg::wk4::YearLoad;
-//use crate::sg::ldp;
-//use crate::sg::wk5::Tranx;
-//use crate::sg::wk5::EvalPara1;
 use crate::sg::wk5::EvDistCalc;
-//use crate::sg::prc1::SubstInfo;
-//use crate::sg::wk4::Substation as Wk4Substation;
-//use crate::sg::wk5::Substation as Wk5Substation;
-//use crate::sg::wk4::Wk4Proc;
-//use regex::Regex;
-//use crate::sg::dcl::LoadProfVal;
-//use crate::sg::wk4::DayLoad;
-//use crate::sg::prc2::Transformer;
 use crate::sg::prc1::p1_spp_conn;
 use crate::sg::prc1::p1_vspp_conn;
 use crate::sg::prc1::SPPConn;
 use crate::sg::prc1::VSPPConn;
 use crate::sg::imp::ld_replan;
 use crate::sg::imp::REPlan;
-//use crate::sg::imp::ld_bisze;
-//use crate::sg::gis1::ar_list;
-//use crate::sg::gis1::DbfVal;
 use crate::sg::mvline::utm_latlong;
 use crate::sg::wk5::ld_fd_es_m;
-//use crate::sg::mvline::latlong_utm;
 use crate::sg::prc3::year_load_power;
 use crate::sg::prc3::ld_p3_calc;
 use crate::sg::prc3::ld_sub_loc;
@@ -74,32 +52,32 @@ pub fn grp1() -> [&'static str;25] {
 
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct Proc41Item {
-    pv: String,
-    sbid: String,
-    name: String,
-    sbnm: String,
-    pos_peak: f32,
-    pos_avg: f32,
-    pos_ngy: f32,
-    neg_peak: f32,
-    neg_avg: f32,
-    neg_ngy: f32,
-    neg_cnt: usize,
-    mwh: f32,
-    mw: f32,
-    max_pw: i32,
-    trxno: usize,
-    mt_tx: f32,
-    latlon: String,
-    dt: usize,
-    mt: usize,
-    mt1: usize,
-    mt3: usize,
-    e5: f64,
-    e2: f64,
-    spp: usize,
-    vspp: usize,
-    repl: usize,
+    pub pv: String,
+    pub sbid: String,
+    pub name: String,
+    pub sbnm: String,
+    pub pos_peak: f32,
+    pub pos_avg: f32,
+    pub pos_ngy: f32,
+    pub neg_peak: f32,
+    pub neg_avg: f32,
+    pub neg_ngy: f32,
+    pub neg_cnt: usize,
+    pub mwh: f32,
+    pub mw: f32,
+    pub max_pw: i32,
+    pub trxno: usize,
+    pub mt_tx: f32,
+    pub latlon: String,
+    pub dt: usize,
+    pub mt: usize,
+    pub mt1: usize,
+    pub mt3: usize,
+    pub e5: f64,
+    pub e2: f64,
+    pub spp: usize,
+    pub vspp: usize,
+    pub repl: usize,
 }
 
 pub async fn prc41() -> Result<(), Box<dyn std::error::Error>> {
@@ -382,6 +360,7 @@ pub async fn prc42() -> Result<(), Box<dyn std::error::Error>> {
     use std::fmt::Write;
 
     let mut pv_sbv_m = HashMap::<String,Vec::<Proc41Item>>::new();
+    let mut pv_sbv_m2 = pv_sbv_m.clone();
     for v in &vv {
         if let Some(vec) = pv_sbv_m.get_mut(&v.pv) {
             vec.push(v.clone());
@@ -522,6 +501,7 @@ pub async fn prc42() -> Result<(), Box<dyn std::error::Error>> {
         let mut pv_m3 = 0usize;
         let mut pv_es = 0f32;
         if let Some(sbv) = pv_sbv_m.get_mut(pv) {
+            let mut sbv2 = Vec::<Proc41Item>::new();
             for v in sbv {
                 v.mwh = 0.0;
                 if mt_del.contains(&v.sbid) { continue; }
@@ -534,6 +514,8 @@ pub async fn prc42() -> Result<(), Box<dyn std::error::Error>> {
                 if v.mt_tx<10.0 { continue; }
                 if v.pos_avg==0.0 { continue; }
 
+                sbv2.push(v.clone());
+
                 pv_dt += v.dt;
                 pv_m1 += v.mt1;
                 pv_m3 += v.mt3;
@@ -545,6 +527,7 @@ pub async fn prc42() -> Result<(), Box<dyn std::error::Error>> {
                     v.dt, v.mt1, v.mt3, v.e5.ceil(), v.e2.ceil(),
                     v.spp, v.vspp, v.repl).unwrap();
             }
+            pv_sbv_m2.insert(pv.to_string(), sbv2);
         }
         write!(ss_r3, "{}\t{}\t{}\t{}\t{}\n", pv, pv_dt, pv_m1, pv_m3, pv_es).unwrap();
     }
@@ -554,7 +537,15 @@ pub async fn prc42() -> Result<(), Box<dyn std::error::Error>> {
     if let Ok(_) = fs::write("prj1/p42_sb_mt.txt", ss_mt) { }
     if let Ok(_) = fs::write("prj1/p42_sb_ne.txt", ss_ne) { }
     if let Ok(_) = fs::write("prj1/p42_sb_eg.txt", ss_eg) { }
+    println!("PV SBV M {}", pv_sbv_m.len());
 
+    let file = format!("{}/p42_pv_sbv_m.bin", crate::sg::imp::data_dir());
+    if let Ok(ser) = bincode::serialize(&pv_sbv_m2) {
+        std::fs::write(file, ser).unwrap();
+    }
+
+    let ld = ld_pv_sbv_m();
+    println!("LOAD {}", ld.len());
     /*
     for v in &vv {
         write!(ss,"{}\t{}\t{}\t{}\t{}\n", v.pv, v.sbid, v.mwh, v.pos_ngy, v.neg_cnt);
@@ -563,6 +554,15 @@ pub async fn prc42() -> Result<(), Box<dyn std::error::Error>> {
     */
     Ok(())
 }
+
+pub fn ld_pv_sbv_m() -> HashMap::<String,Vec::<Proc41Item>> {
+    if let Ok(f) = File::open(crate::sg::ldp::res("p42_pv_sbv_m.bin")) {
+        if let Ok(dt)=bincode::deserialize_from::<BufReader<File>, HashMap::<String,Vec::<Proc41Item>>>(BufReader::new(f)) {
+            return dt;
+        }
+    }
+    HashMap::<String, Vec::<Proc41Item>>::new()
+}    
 
 pub async fn prc43() -> Result<(), Box<dyn std::error::Error>> {
     car_reg_2023().await;
@@ -1124,7 +1124,7 @@ pub async fn prc46() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 
-fn pv_adjust_c() -> Vec::<(&'static str, f64, f64)> {
+pub fn pv_adjust_c() -> Vec::<(&'static str, f64, f64)> {
     vec![
         ("ชลบุรี", 1.4, 0.0,),
         ("ระยอง", 4.5, 0.0,),
@@ -1359,12 +1359,23 @@ async fn car_reg_2023_c() {
     if let Ok(_) = fs::write("prj1/s_et_wh.txt", s_et_wh) { }
 }
 
+#[derive(Serialize, Deserialize, Debug, Clone, Default)]
+pub struct EVCalc {
+    pub pv: String,
+    pub yr: i32,
+    pub evno: f32,
+    pub evac: f32,
+    pub evmw: f32,
+    pub evmwh: f32,
+}
+ 
 pub async fn prc47() -> Result<(), Box<dyn std::error::Error>> {
    car_reg_2023_d().await;
    Ok(())
 }
 
 use crate::sg::prc3::ld_p3_prvs;
+
 async fn car_reg_2023_d() {
     let prvs = ld_p3_prvs();
     let mut pv_ca_mp = load_pvcamp();
@@ -1503,7 +1514,7 @@ async fn car_reg_2023_d() {
                     //write!(ss,"\t{}", et_mwh); // evs of the year
                     write!(ss,"\t{}", pv_ev_mwh+pv_et_mwh).unwrap(); // evs of the year
 
-                    write!(s_ev_y, "\t{}", pv_ev_la_yr).unwrap();
+                   write!(s_ev_y, "\t{}", pv_ev_la_yr).unwrap();
                     write!(s_ev_a, "\t{}", pv_ev_ac_no).unwrap();
                     write!(s_ev_mw, "\t{}", pv_ev_mw).unwrap();
                     write!(s_ev_wh, "\t{}", pv_ev_mwh).unwrap();
@@ -1537,5 +1548,223 @@ async fn car_reg_2023_d() {
     if let Ok(_) = fs::write("prj1/a_s_et_mw.txt", s_et_mw) { }
     if let Ok(_) = fs::write("prj1/a_s_et_wh.txt", s_et_wh) { }
 }
+
+pub fn prc48() {
+    let prvs = ld_p3_prvs();
+    let mut pv_ca_mp = load_pvcamp();
+    let mut pv_ca_mp2 = HashMap::new();
+    //let mut cnt0 = 0.0;
+    pv_ca_mp.insert("กรุงเทพมหานคร".to_string(), 967297.0);
+    for (k, v) in &pv_ca_mp {
+        //cnt0 += *v;
+        let mut kk = k.to_string();
+        let mut vv = *v;
+        if k == "ยะลา" {
+            if let Some(v2) = pv_ca_mp.get("สาขา อ.เบตง") {
+                //let v1 = *v2;
+                vv += *v2;
+            }
+        }
+        if kk == " พระนครศรีอยุธยา" {
+            kk = "พระนครศรีอยุธยา".to_string();
+        }
+        if kk == "แม่ฮองสอน" {
+            kk = "แม่ฮ่องสอน".to_string();
+        }
+        if kk == "สาขา อ.เบตง" {
+            //print!("NO BETONG\n");
+        } else {
+            //print!("'{}' - {}\n", kk, vv);
+            pv_ca_mp2.insert(kk.clone(), vv);
+            //pv_ca_cn2.insert(kk, 0);
+        }
+    }
+
+    let ev_adx = pv_adjust_c();
+    let mut tk0 = 0.0;
+    for (i, adx) in ev_adx.iter().enumerate() {
+        let ts = adx.0.to_string();
+        if let Some(nn) = pv_ca_mp2.get_mut(&ts) {
+            let tk = *nn * ev_adx[i].2 / 100.0;
+            *nn -= tk;
+            tk0 += tk;
+        }
+    }
+    let mut ass_sm = 0.0;
+    for (i, adx) in ev_adx.iter().enumerate() {
+        let _ts = adx.0.to_string();
+        if let Some(cn) = pv_ca_mp2.get_mut(&adx.0.to_string()) {
+            let ad = tk0 * ev_adx[i].1 / 100.0;
+            ass_sm += ev_adx[i].1;
+            *cn += ad;
+        }
+    }
+    
+    println!("assign %{}", ass_sm);
+
+    let mut pv_car_reg_mp = HashMap::new();
+    let mut total = 0.0f32;
+    for (k, v) in &pv_ca_mp2 {
+        if ["กรุงเทพมหานคร,นนทบุรี,สมุทรปราการ"].contains(&k.as_str()) {
+            continue;
+        }
+        let mut pv_ca_reg = EvDistCalc::default();
+        pv_ca_reg.id = k.to_string();
+        pv_ca_reg.ev_no = *v as f32;
+        total += pv_ca_reg.ev_no;
+        pv_car_reg_mp.insert(k.to_string(), pv_ca_reg);
+    }
+
+    for (_k, v) in &mut pv_car_reg_mp {
+        if total > 0.0 {
+            v.ev_pc = v.ev_no / total as f32;
+        }
+    }
+
+    let ev_ls_yr = 75690.0;
+    let ev_ac_no = 89907.0 + ev_ls_yr;
+
+    let et_ls_yr = 238.0 * 4.0;
+    let et_ac_no = 2962.0 + et_ls_yr;
+
+    let eb_ls_yr = 9059.0 * 4.0;
+    let eb_ac_no = 47116.0;
+    //use std::fmt::Write;
+    //let mut ss = String::new();
+
+    let (ev_rt0,ev_gw0) = (0.1,0.007);
+    let (et_rt0,et_gw0) = (0.2,0.005);
+    let (eb_rt0,eb_gw0) = (0.1,0.005);
+
+    let ev_mw = 0.011; // mw
+    let ev_dy_hr = 4.0;
+
+    let et_mw = 0.250; // mw
+    let et_dy_hr = 8.0;
+
+    let eb_mw = 0.0001; // 100w
+    let eb_dy_hr = 6.0;
+
+    let mut pv_ev_for = HashMap::<String,Vec::<EVCalc>>::new();
+    let mut pv_et_for = HashMap::<String,Vec::<EVCalc>>::new();
+    let mut pv_eb_for = HashMap::<String,Vec::<EVCalc>>::new();
+    for pv in &prvs {
+        let mut pv_ev_cal = Vec::<EVCalc>::new();
+        let mut pv_et_cal = Vec::<EVCalc>::new();
+        let mut pv_eb_cal = Vec::<EVCalc>::new();
+
+        if let Some(v) = pv_car_reg_mp.get(pv) {
+            let mut pv_ev_ac_no = ev_ac_no * v.ev_pc;
+            let mut pv_ev_la_yr = ev_ls_yr * v.ev_pc;
+            let mut ev_rt = ev_rt0;
+
+            let mut pv_et_ac_no = et_ac_no * v.ev_pc;
+            let mut pv_et_la_yr = et_ls_yr * v.ev_pc;
+            let mut et_rt = et_rt0;
+
+            let mut pv_eb_ac_no = eb_ac_no * v.ev_pc;
+            let mut pv_eb_la_yr = eb_ls_yr * v.ev_pc;
+            let mut eb_rt = eb_rt0;
+
+            for y in 2024..=2039 {
+                ev_rt += ev_gw0;
+                et_rt += et_gw0;
+                eb_rt += eb_gw0;
+
+                pv_ev_la_yr *= 1.0+ev_rt;
+                pv_et_la_yr *= 1.0+et_rt;
+                pv_eb_la_yr *= 1.0+eb_rt;
+
+                pv_ev_ac_no += pv_ev_la_yr;
+                pv_et_ac_no += pv_et_la_yr;
+                pv_eb_ac_no += pv_eb_la_yr;
+
+                let pv_ev_mw = pv_ev_ac_no * ev_mw * ev_dy_hr;
+                let pv_et_mw = pv_et_ac_no * et_mw * et_dy_hr;
+                let pv_eb_mw = pv_eb_ac_no * eb_mw * eb_dy_hr;
+
+                let pv_ev_mwh = pv_ev_mw * 360.0;
+                let pv_et_mwh = pv_et_mw * 360.0;
+                let pv_eb_mwh = pv_eb_mw * 360.0;
+
+                if y>= 2025 {
+                   let evca = EVCalc {
+                        pv: pv.to_string(),
+                        yr: y,
+                        evno: pv_ev_la_yr,
+                        evac: pv_ev_ac_no,
+                        evmw: pv_ev_mw,
+                        evmwh: pv_ev_mwh,
+                    };
+                    pv_ev_cal.push(evca);
+
+                    let etca = EVCalc {
+                        pv: pv.to_string(),
+                        yr: y,
+                        evno: pv_et_la_yr,
+                        evac: pv_et_ac_no,
+                        evmw: pv_et_mw,
+                        evmwh: pv_et_mwh,
+                    };
+                    pv_et_cal.push(etca);
+
+                    let ebca = EVCalc {
+                        pv: pv.to_string(),
+                        yr: y,
+                        evno: pv_eb_la_yr,
+                        evac: pv_eb_ac_no,
+                        evmw: pv_eb_mw,
+                        evmwh: pv_eb_mwh,
+                    };
+                    pv_eb_cal.push(ebca);
+               }
+            }
+            pv_ev_for.insert(pv.to_string(), pv_ev_cal);
+            pv_et_for.insert(pv.to_string(), pv_et_cal);
+            pv_eb_for.insert(pv.to_string(), pv_eb_cal);
+
+        }
+    }
+    let file = format!("{}/p48_pv_ev.bin", crate::sg::imp::data_dir());
+    if let Ok(ser) = bincode::serialize(&pv_ev_for) {
+        std::fs::write(file, ser).unwrap(); }
+
+    let file = format!("{}/p48_pv_et.bin", crate::sg::imp::data_dir());
+    if let Ok(ser) = bincode::serialize(&pv_et_for) {
+        std::fs::write(file, ser).unwrap(); }
+ 
+    let file = format!("{}/p48_pv_eb.bin", crate::sg::imp::data_dir());
+    if let Ok(ser) = bincode::serialize(&pv_eb_for) {
+        std::fs::write(file, ser).unwrap(); }
+ 
+}
+
+pub fn ld_p48_pv_ev() -> HashMap::<String,Vec<EVCalc>> {
+    if let Ok(f) = File::open(crate::sg::ldp::res("p48_pv_ev.bin")) {
+        if let Ok(dt)=bincode::deserialize_from::<BufReader<File>, HashMap::<String,Vec<EVCalc>>>(BufReader::new(f)) {
+            return dt;
+        }
+    }
+    HashMap::<String,Vec<EVCalc>>::new()
+}    
+
+pub fn ld_p48_pv_et() -> HashMap::<String,Vec<EVCalc>> {
+    if let Ok(f) = File::open(crate::sg::ldp::res("p48_pv_et.bin")) {
+        if let Ok(dt)=bincode::deserialize_from::<BufReader<File>, HashMap::<String,Vec<EVCalc>>>(BufReader::new(f)) {
+            return dt;
+        }
+    }
+    HashMap::<String,Vec<EVCalc>>::new()
+}    
+
+pub fn ld_p48_pv_eb() -> HashMap::<String,Vec<EVCalc>> {
+    if let Ok(f) = File::open(crate::sg::ldp::res("p48_pv_eb.bin")) {
+        if let Ok(dt)=bincode::deserialize_from::<BufReader<File>, HashMap::<String,Vec<EVCalc>>>(BufReader::new(f)) {
+            return dt;
+        }
+    }
+    HashMap::<String,Vec<EVCalc>>::new()
+}    
+
 
 

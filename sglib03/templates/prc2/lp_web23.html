@@ -1,0 +1,28 @@
+<html lang="en">
+ <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.cls1 {
+#  border-style: solid;
+  border-color: #92a8d1;
+}
+</style>
+
+ </head>
+ <body>
+   <div>
+   {% for (i,(p,v)) in prvs.iter().enumerate() %}
+   <div style="background-color:#FFF4A3;">
+     {{p}}
+     {% for (i,s) in v.iter().enumerate() %}
+   <div style="background-color:#FFC0C7; display: inline-block;">
+     <a href='{{s.0}}'>{{s.1}}</a>
+   </div>
+     {% endfor %}
+  </div>
+   {% endfor %}
+   </div>
+ </body>
+</html>
+

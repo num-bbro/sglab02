@@ -1,0 +1,28 @@
+<html lang="en">
+ <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.cls1 {
+  border-color: #92a8d1;
+}
+</style>
+ </head>
+<body>
+  feed: {{feed}}
+  year: {{year}}
+  <div style="background-color:#FFF4A3;">
+  {% for (di,(or,hv)) in meas.iter().enumerate() %}
+  <div style="background-color:#FFC0C7; border-style: double;">
+    {{or}}
+    {% for (hi,dd) in hv.iter().enumerate() %}
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge; width:1.2%;text-align: center;">
+        {{dd}}
+      </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+  </div>
+</body>
+</html>
+

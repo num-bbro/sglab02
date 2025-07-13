@@ -1,10 +1,10 @@
 
-resolver = "1"
 
 [workspace]
+resolver = "2"
 members = [
 "sglab02_lib",
-"sglab02_bin",
+"sglab02_bin", "sglib03", "sglib04",
 ]
 
 #[package]

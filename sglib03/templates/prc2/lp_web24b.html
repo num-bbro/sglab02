@@ -1,0 +1,41 @@
+<html lang="en">
+ <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.OK {
+#  background-color:#D9EEE1; display: inline-block; border-style: ridge; 
+  background-color:#FFF4A3; display: inline-block; border-style: ridge;
+}
+.NG {
+  background-color:#FFC0C7; display: inline-block; border-style: ridge;
+}
+.EX {
+  display: inline-block; border-style: ridge;
+}
+
+</style>
+
+ </head>
+ <body>
+   <div>
+     <a href='{{WEBROOT}}/lp_web24a'>web24a</a>
+   {% for (i,(p,v)) in prvs.iter().enumerate() %}
+   <div style="background-color:#e0e0e0; border-style: solid;">
+     {{p}}
+     {% for (i,(s,d,n)) in v.iter().enumerate() %}
+     <div class="{{s.cls}}">
+     <a href='{{s.loc}}' target="_blank">{{s.sub}}</a>:
+     <a href='{{WEBROOT}}/lp_sub2/{{s.sub}}' target="_blank">
+       A:{{s.pc}}/{{s.pc0}}/{{s.pc1}}
+       D:{{d.pc}}/{{d.pc0}}/{{s.pc1}}
+       N:{{s.pc}}/{{s.pc0}}/{{s.pc1}}
+     </a>
+   </div>
+     {% endfor %}
+  </div>
+   {% endfor %}
+   </div>
+ </body>
+</html>
+

@@ -1,0 +1,51 @@
+<html lang="en">
+ <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.cls1 {
+#  border-style: solid;
+  border-color: #92a8d1;
+}
+</style>
+
+ </head>
+ <body>
+   <div>EV TRUCK ESTIMATION for each substation</div>
+   <div>
+   <div style="background-color:#FFF4A3;">
+     {% for y in 2023..2040 %}
+     {% if y==2023 %}
+   <div style="background-color:#FFC0C7; display: inline-block; width:200">
+     substation
+   </div>
+     {% else %}
+   <div style="background-color:#ffffC7; display: inline-block; width:70; text-align: center;">
+     {{y}}
+   </div>
+     {% endif %}
+      {% endfor %}
+    </div>
+   {% for (i,va) in ev_proj.iter().enumerate() %}
+   <div style="background-color:#FFF4A3;">
+   {% for (j,a) in va.iter().enumerate() %}
+     {% if j==0 %}
+   <div style="background-color:#FFC0C7; display: inline-block; width:200">
+     {{i+1}}.
+     {{a.pv}}
+     :
+     {{a.sb}}
+   </div>
+     {% else %}
+   <div style="background-color:#ffffC7; display: inline-block; width:70; text-align: center;">
+     {% let no = format!("{:.2}", a.no)  %}
+     {{no}}
+   </div>
+     {% endif %}
+   {% endfor %}
+   </div>
+   {% endfor %}
+   </div>
+ </body>
+</html>
+

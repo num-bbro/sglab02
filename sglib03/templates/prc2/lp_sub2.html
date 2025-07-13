@@ -1,0 +1,150 @@
+<html lang="en">
+ <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.cls1 {
+  border-color: #92a8d1;
+}
+</style>
+
+ </head>
+ <body>
+   <div>
+     {{sub}}
+
+     <a href='{{crate::prc2::WEBROOT}}/lp_sub_calc/{{sub}}/{{2024}}' target="_blank">
+   <div style="background-color:#FFC0C7; display: inline-block; border-style: double;">
+     Y2024:
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{calc[0].p_pk}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{calc[0].p_avg}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{calc[0].p_en}}
+      </div>
+   </div>
+     </a>
+
+     <a href='{{crate::prc2::WEBROOT}}/lp_sub_calc/{{sub}}/{{2023}}' target="_blank">
+   <div style="background-color:#FFC0C7; display: inline-block; border-style: double;">
+     Y2023:
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{calc[1].p_pk}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{calc[1].p_avg}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{calc[1].p_en}}
+      </div>
+   </div>
+     </a>
+
+     <a href='{{crate::prc2::WEBROOT}}/lp_sub_calc/{{sub}}/{{2022}}' target="_blank">
+  <div style="background-color:#FFC0C7; display: inline-block; border-style: double;">
+     Y2022:
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{calc[2].p_pk}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{calc[2].p_avg}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{calc[2].p_en}}
+      </div>
+   </div>
+     </a>
+
+     <a href='{{crate::prc2::WEBROOT}}/lp_sub_calc/{{sub}}/{{2021}}' target="_blank">
+  <div style="background-color:#FFC0C7; display: inline-block; border-style: double;">
+     Y2021:
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{calc[3].p_pk}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{calc[3].p_avg}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{calc[3].p_en}}
+      </div>
+   </div>
+     </a>
+
+
+
+  </div>
+
+   <div>
+   {% for (i,(f,dv)) in feeds.iter().enumerate() %}
+   <div style="background-color:#FFF4A3;">
+     {{f}} 
+
+   <div style="background-color:#FFC0C7; display: inline-block; border-style: double;">
+     <a href='{{crate::prc2::WEBROOT}}/lp_feed_calc/{{f}}/{{2024}}' target="_blank">
+     Y2024:
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{dv[0].p_pk}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{dv[0].p_avg}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{dv[0].p_en}}
+      </div>
+      </a>
+   </div>
+
+   <div style="background-color:#FFC0C7; display: inline-block; border-style: double;">
+     <a href='{{crate::prc2::WEBROOT}}/lp_feed_calc/{{f}}/{{2023}}' target="_blank">
+     Y2023:
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{dv[1].p_pk}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{dv[1].p_avg}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{dv[1].p_en}}
+      </div>
+     </a>
+   </div>
+
+   <div style="background-color:#FFC0C7; display: inline-block; border-style: double;">
+     <a href='{{crate::prc2::WEBROOT}}/lp_feed_calc/{{f}}/{{2022}}' target="_blank">
+     Y2022:
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{dv[2].p_pk}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{dv[2].p_avg}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{dv[2].p_en}}
+      </div>
+     </a>
+   </div>
+
+   <div style="background-color:#FFC0C7; display: inline-block; border-style: double;">
+     <a href='{{crate::prc2::WEBROOT}}/lp_feed_calc/{{f}}/{{2021}}' target="_blank">
+     Y2021:
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{dv[3].p_pk}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{dv[3].p_avg}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+        {{dv[3].p_en}}
+      </div>
+     </a>
+   </div>
+
+  </div>
+   {% endfor %}
+   </div>
+ </body>
+</html>
+

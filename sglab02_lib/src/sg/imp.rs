@@ -20,7 +20,8 @@ pub fn src_dir() -> &'static str {
 }
 
 pub fn data_dir() -> &'static str {
-    "../sgdata"
+    "/mnt/c/Users/choom/Documents/wk33/peasg/dev/sgdata"
+    //"../sgdata"
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -484,12 +485,12 @@ pub async fn pea_vspp_excel() -> Result<(), Box<dyn std::error::Error>> {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct XlsSheet {
-    path: String,
-    name: String,
-    shnm: String,
-    rcnt: usize,
-    ccnt: usize,
-    data: Vec<Vec<String>>,
+    pub path: String,
+    pub name: String,
+    pub shnm: String,
+    pub rcnt: usize,
+    pub ccnt: usize,
+    pub data: Vec<Vec<String>>,
 }
 
 pub async fn xlsx_info(flst: &Vec<String>) -> Result<Vec<XlsSheet>, Box<dyn std::error::Error>> {
@@ -500,6 +501,56 @@ pub async fn xlsx_info(flst: &Vec<String>) -> Result<Vec<XlsSheet>, Box<dyn std:
         let ff = pt.file_name().unwrap().to_str().unwrap();
         let sheets = excel.sheet_names().to_owned();
         for sh in &sheets {
+            if let Ok(range) = excel.worksheet_range(sh) {
+                let path = fl.to_string();
+                let name = ff.to_string();
+                let shnm = sh.to_string();
+                let rcnt = range.get_size().0;
+                let ccnt = range.get_size().1;
+                let mut data = Vec::<Vec<String>>::new();
+
+                for row in range.rows() {
+                    let mut rw = Vec::<String>::new();
+                    for c in 0..row.len() {
+                        rw.push(row[c].to_string());
+                    }
+                    data.push(rw);
+                }
+
+                let xls_info = XlsSheet {
+                    path,
+                    name,
+                    shnm,
+                    rcnt,
+                    ccnt,
+                    data,
+                };
+                xlsv.push(xls_info);
+            }
+        }
+    }
+    Ok(xlsv)
+}
+
+use calamine::SheetVisible;
+
+pub async fn xlsx_info2(flst: &Vec<String>) -> Result<Vec<XlsSheet>, Box<dyn std::error::Error>> {
+    let mut xlsv = Vec::<XlsSheet>::new();
+    for fl in flst {
+        let pt = PathBuf::from(fl.clone());
+        let mut excel: Xlsx<_> = open_workbook(fl.clone())?;
+        let ff = pt.file_name().unwrap().to_str().unwrap();
+        let meta = excel.sheets_metadata();
+        let mut names = Vec::<String>::new();
+        for mt in meta {
+            if let SheetVisible::Hidden = mt.visible {
+                continue;
+            } else if let SheetVisible::VeryHidden = mt.visible {
+                continue;
+            }
+            names.push(mt.name.to_string());
+        }
+        for sh in &names {
             if let Ok(range) = excel.worksheet_range(sh) {
                 let path = fl.to_string();
                 let name = ff.to_string();
@@ -1052,7 +1103,7 @@ pub async fn xlsx_data(flst: &Vec<String>) -> Result<Vec<XlsSheet>, Box<dyn std:
     Ok(xlsv)
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone, Default)]
 pub struct StoragePlan {
     sbid: String,
     sbnm: String,
@@ -1091,6 +1142,7 @@ pub async fn pea_bess_ana() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
     let mut newsto = Vec::<StoragePlan>::new();
+    let mut sb_ess = HashMap::<String, StoragePlan>::new();
     while let Some(be) = bess.pop() {
         for rw in &be.data {
             if let Some(s) = ennm.get(&rw[1]) {
@@ -1109,9 +1161,24 @@ pub async fn pea_bess_ana() -> Result<(), Box<dyn std::error::Error>> {
                     yrno,
                 };
                 println!("sto: {:?}", stor);
-                newsto.push(stor);
+                newsto.push(stor.clone());
+                if let Some(_) = sb_ess.get(&stor.sbid) {
+                    println!("BESS error {}", stor.sbid);
+                } else {
+                    sb_ess.insert(stor.sbid.to_string(), stor);
+                }
             }
         }
+    }
+    let fst = format!("/mnt/e/CHMBACK/pea-data/data1/bess_plan.bin");
+    if let Ok(se) = bincode::serialize(&newsto) {
+        std::fs::write(&fst, se).unwrap();
+        println!("write to {fst}");
+    }
+    let fst = format!("/mnt/e/CHMBACK/pea-data/data1/sb_ess.bin");
+    if let Ok(se) = bincode::serialize(&sb_ess) {
+        std::fs::write(&fst, se).unwrap();
+        println!("write to {fst}");
     }
     Ok(())
 }

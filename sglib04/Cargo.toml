@@ -1,0 +1,42 @@
+[package]
+name = "sglib04"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+#askama = "0.14.0"
+#askama_axum = "0.5.0"
+#axum = "0.8.4"
+axum = { version = "0.7.4", features = ["http2", "multipart"] }
+#axum = { version = "0.8.4", features = ["http2", "multipart"] }
+financial = "1.1.5"
+image = "0.25.6"
+imageproc = "0.25.0"
+serde = "1.0.219"
+tokio = { version = "1.45.0", features = ["full"] }
+askama = { version = "0.12.1", features = ["serde", "with-axum"] }
+askama_axum = "0.4.0"
+bincode = "1.3.3"
+docx-rs = "0.4.17"
+zip = "2.6.1"
+thousands = "0.2.0"
+sglab02_lib = { path = "../sglab02_lib", version = "^0.1.0" }
+sglib03 = { path = "../sglib03", version = "^0.1.0" }
+num-traits = "0.2.19"
+regex = "1.11.1"
+csv = "1.3.1"
+encoding_rs = "0.8.35"
+shapefile = "0.7.0"
+yore = "1.1.0"
+geo = "0.30.0"
+geo-types = "0.7.16"
+#chromiumoxide = { version = "0.7.0", features = ["tokio", "tokio-runtime"] }
+#chromiumoxide_cdp = "0.7.0"
+clap = { version = "4.5.37", features = ["derive", "cargo"] }
+futures = "0.3.31"
+headless_chrome = "1.0.17"
+base64 = "0.22.1"
+ab_glyph = "0.2.29"
+phf = { version = "0.11.3", features = ["macros"] }
+substring = "1.4.5"
+

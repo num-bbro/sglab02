@@ -1,0 +1,83 @@
+<html lang="en">
+ <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.cls1 {
+  border-color: #92a8d1;
+}
+</style>
+
+ </head>
+ <body>
+   <div>
+   {% for (i,(f,dv)) in feeds.iter().enumerate() %}
+   <div style="background-color:#FFF4A3;">
+     {{f}} 
+
+   <div style="background-color:#FFC0C7; display: inline-block; border-style: double;">
+     <a href='{{crate::prc2::WEBROOT}}/lp_feed_meas/{{f}}/{{2024}}'>
+     Y2024:
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+     val:{{dv[0]}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+     inv:{{dv[1]}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+     non:{{dv[2]}}
+      </div>
+      </a>
+   </div>
+
+   <div style="background-color:#FFC0C7; display: inline-block; border-style: double;">
+     <a href='{{crate::prc2::WEBROOT}}/lp_feed_meas/{{f}}/{{2023}}'>
+     Y2023:
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+     val:{{dv[3]}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+     inv:{{dv[4]}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+     non:{{dv[5]}}
+      </div>
+     </a>
+   </div>
+
+   <div style="background-color:#FFC0C7; display: inline-block; border-style: double;">
+     <a href='{{crate::prc2::WEBROOT}}/lp_feed_meas/{{f}}/{{2022}}'>
+     Y2022:
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+     val:{{dv[6]}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+     inv:{{dv[7]}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+     non:{{dv[8]}}
+      </div>
+     </a>
+   </div>
+
+   <div style="background-color:#FFC0C7; display: inline-block; border-style: double;">
+     <a href='{{crate::prc2::WEBROOT}}/lp_feed_meas/{{f}}/{{2021}}'>
+     Y2021:
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+     val:{{dv[9]}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+     inv:{{dv[10]}}
+      </div>
+      <div style="background-color:#D9EEE1; display: inline-block; border-style: ridge;">
+     non:{{dv[11]}}
+      </div>
+     </a>
+   </div>
+
+  </div>
+   {% endfor %}
+   </div>
+ </body>
+</html>
+

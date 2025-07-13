@@ -1,0 +1,11 @@
+pub mod aoj;
+pub mod calc;
+pub mod geo1;
+pub mod geo2;
+pub mod geo3;
+pub mod geo4;
+pub mod ld1;
+pub mod prc41;
+pub mod prc42;
+pub mod prc43;
+pub mod web1;

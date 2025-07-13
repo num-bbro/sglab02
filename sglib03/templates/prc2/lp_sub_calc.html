@@ -1,0 +1,37 @@
+<html lang="en">
+ <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.val {
+  background-color:#D9EEE1; display: inline-block; border-style: ridge; width:1.4%;text-align: center;
+}
+.null {
+  background-color:#FFC0C7; display: inline-block; border-style: ridge; width:1.4%;text-align: center;
+}
+.none {
+  background-color:#FFF4A3; display: inline-block; border-style: ridge; width:1.4%;text-align: center;
+}
+</style>
+ </head>
+<body>
+  sub: {{sub}}
+  year: {{year}}
+  <a href='{{WEBROOT}}/lp_gr_sb_yr/{{sub}}/{{year}}' target="_blank">gr1</a>
+  <a href='{{WEBROOT}}/lp_gr_sb_yr2/{{sub}}/{{year}}' target="_blank">gr2</a>
+  <a href='{{WEBROOT}}/gr_gp1/{{sub}}' target="_blank">GRP1</a>
+  <div style="background-color:#FFF4A3;">
+  {% for (di,(or,hv)) in calc.iter().enumerate() %}
+  <div style="background-color:#FFC0C7; border-style: double;">
+    {{or}}
+    {% for (hi,dd) in hv.iter().enumerate() %}
+    <div class="{{dd.0}}">
+        {{dd.1}}
+      </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+  </div>
+</body>
+</html>
+
