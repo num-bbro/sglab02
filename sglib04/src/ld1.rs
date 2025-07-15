@@ -1,5 +1,6 @@
 use sglab02_lib::sg::wk5::EvDistCalc;
 
+use crate::aoj::DbfData;
 use crate::geo1::CnlData;
 use crate::geo1::MeterBill;
 use crate::geo1::NodeInfo;
@@ -16,6 +17,59 @@ use std::collections::HashMap;
 use std::error::Error;
 use std::fs::File;
 use std::io::BufReader;
+
+/*
+pub fn p13_cnl_trs(ar: &str) -> Result<Vec<CnlTrans>, Box<dyn Error>> {
+pub fn p13_mt_bil(ar: &str) -> Result<Vec<MeterBill>, Box<dyn Error>> {
+pub fn p13_cnl_mt(ar: &str) -> Result<Vec<CnlData>, Box<dyn Error>> {
+pub fn p13_mt2bil(ar: &str) -> Result<Vec<Vec<usize>>, Box<dyn Error>> {
+pub fn p13_nodes(ar: &str) -> Result<HashMap<u64, NodeInfo>, Box<dyn Error>> {
+pub fn p13_gis_db(ar: &str, ly: &str) -> Result<Vec<HashMap<String, DbfData>>, Box<dyn Error>> {
+*/
+
+pub fn p13_gis_db(ar: &str, ly: &str) -> Result<Vec<HashMap<String, DbfData>>, Box<dyn Error>> {
+    let fnm = format!("/mnt/e/CHMBACK/pea-data/db2/{ar}_{ly}.at");
+    if let Ok(fnm) = File::open(&fnm) {
+        let fnm = BufReader::new(fnm);
+        if let Ok(fnm) =
+            bincode::deserialize_from::<BufReader<File>, Vec<HashMap<String, DbfData>>>(fnm)
+        {
+            return Ok(fnm);
+        }
+    }
+    Err(format!("Can open {fnm}").into())
+}
+
+/*
+
+        //let mvat = format!("{DB2_DIR}/{ar}_{mveq}.at");
+        //let hvat = format!("{DB2_DIR}/{ar}_DS_HVConductor.at");
+        //let hvat = format!("{DB2_DIR}/{ar}_{hveq}.at");
+        //println!("mvat: {mvat}");
+
+        if let (Ok(fnds), Ok(fctr), Ok(fcmt), Ok(fbil), Ok(fm2b), Ok(mvat)) = (
+            File::open(&fnds),
+            File::open(&fctr),
+            File::open(&fcmt),
+            File::open(&fbil),
+            File::open(&fm2b),
+            File::open(&mvat),
+        ) {
+            println!("proc 2");
+            let fctr = BufReader::new(fctr);
+            let fcmt = BufReader::new(fcmt);
+            let fbil = BufReader::new(fbil);
+            let fm2b = BufReader::new(fm2b);
+            //let hvat = BufReader::new(hvat);
+            let mvat = BufReader::new(mvat);
+            if let (Ok(fnds), Ok(ctrs), Ok(fcmt), Ok(fbil), Ok(fm2b), Ok(mvat)) = (
+                bincode::deserialize_from::<BufReader<File>, HashMap<u64, NodeInfo>>(fnds),
+                bincode::deserialize_from::<BufReader<File>, Vec<CnlData>>(fcmt),
+                bincode::deserialize_from::<BufReader<File>, Vec<MeterBill>>(fbil),
+                bincode::deserialize_from::<BufReader<File>, Vec<Vec<usize>>>(fm2b),
+                bincode::deserialize_from::<BufReader<File>, Vec<HashMap<String, DbfData>>>(mvat),
+            ) {
+*/
 
 //pub fn p13_sb_fd_tr(ar: &str) -> Result<HashMap<String, SubFeedTrans>, Box<dyn Error>> {
 pub fn p13_sb_fd_tr(ar: &str) -> Result<Vec<SubFeedTrans>, Box<dyn Error>> {
