@@ -3069,7 +3069,7 @@ dependencies = [
 
 [[package]]
 name = "sglib04"
-version = "0.1.1"
+version = "0.1.3"
 dependencies = [
  "ab_glyph",
  "askama",

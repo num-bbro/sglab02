@@ -1918,7 +1918,7 @@ pub fn p13_ev_distr(ev_adx: &[(&str, f64, f64)]) -> HashMap<String, EvDistCalc> 
     pv_car_reg_mp
 }
 
-const EV_PRV_ADJ_1: [(&str, f64, f64); 57] = [
+pub const EV_PRV_ADJ_1: [(&str, f64, f64); 57] = [
     ("สมุทรสาคร", 5.0, 0.0),
     ("พระนครศรีอยุธยา", 6.0, 0.0),
     ("ปทุมธานี", 12.0, 0.0),
