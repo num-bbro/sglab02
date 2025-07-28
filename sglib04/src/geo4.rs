@@ -391,6 +391,7 @@ pub async fn p13_re_plan() -> Result<(), Box<dyn Error>> {
 }
 
 use phf::phf_map;
+
 pub static GPPS: phf::Map<&'static str, u32> = phf_map! {
 "ระยอง" => 942205,
 "กรุงเทพมหานคร" => 675979,
