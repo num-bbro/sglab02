@@ -43,9 +43,9 @@ use std::collections::HashMap;
 use std::error::Error;
 
 pub struct EnergyProfile {
-    ev: Vec<Vec<AreaRatio>>,
-    et: Vec<Vec<AreaRatio>>,
-    eb: Vec<Vec<AreaRatio>>,
+    pub ev: Vec<Vec<AreaRatio>>,
+    pub et: Vec<Vec<AreaRatio>>,
+    pub eb: Vec<Vec<AreaRatio>>,
 }
 
 pub fn calc3() -> Result<(), Box<dyn Error>> {
