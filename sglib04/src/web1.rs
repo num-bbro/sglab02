@@ -622,10 +622,10 @@ pub fn ben_amt_proj(ben: &SubBenInfo) -> (BenProj, BenProj, BenProj, BenProj) {
     (be_sub_save, be_re_diff, be_svg_save, be_en_added)
 }
 
-const ENERGY_GRW_RATE: f32 = 0.04f32;
-const ECO_GRW_RATE: f32 = 0.04f32;
-const UNIT_PRICE: f32 = 4.45f32;
-const BALANCE_RATE: f32 = 0.33;
+pub const ENERGY_GRW_RATE: f32 = 0.04f32;
+pub const ECO_GRW_RATE: f32 = 0.04f32;
+pub const UNIT_PRICE: f32 = 4.45f32;
+pub const BALANCE_RATE: f32 = 0.33;
 
 pub fn ben_unbalan(sbtr: &SubCalc) -> BenProj {
     //print!("====  UNBALANCE  ");
@@ -651,8 +651,8 @@ pub fn ben_unbalan(sbtr: &SubCalc) -> BenProj {
     BenProj { proj }
 }
 
-const NON_TECLOSS_CAP_RATE: f32 = 0.31f32;
-const NON_TECLOSS_IMP_RATE: f32 = 0.04f32;
+pub const NON_TECLOSS_CAP_RATE: f32 = 0.31f32;
+pub const NON_TECLOSS_IMP_RATE: f32 = 0.04f32;
 
 pub fn ben_non_tech(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     //print!("====  NONTECHLOSS  ");
@@ -670,8 +670,8 @@ pub fn ben_non_tech(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     BenProj { proj }
 }
 
-const SMETER_ACCU_IMPRV: f32 = 0.01f32;
-const SMETER_BILL_IMPRV: f32 = 0.4f32;
+pub const SMETER_ACCU_IMPRV: f32 = 0.01f32;
+pub const SMETER_BILL_IMPRV: f32 = 0.4f32;
 
 pub fn ben_bill_accu(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     //print!("====  BILLACCU  ");
@@ -690,7 +690,7 @@ pub fn ben_bill_accu(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     BenProj { proj }
 }
 
-const CASH_FLOW_COST: f32 = 0.0569;
+pub const CASH_FLOW_COST: f32 = 0.0569;
 
 pub fn ben_cash_flow(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     //print!("====  CASHFLOW ");
@@ -720,7 +720,7 @@ pub fn ben_cash_flow(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     BenProj { proj }
 }
 
-const DR_DEV_PLAN_RATE: f32 = 0.02f32;
+pub const DR_DEV_PLAN_RATE: f32 = 0.02f32;
 
 pub fn ben_dr_save(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     //let cap1 = 80_000_000f64 / 22_000_000f64;
@@ -750,8 +750,8 @@ pub fn ben_dr_save(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     BenProj { proj }
 }
 
-const BOX_LINE_NEED_RATE: f32 = 0.05f32;
-const BOX_LINE_UNIT_COST: f32 = 172.41f32;
+pub const BOX_LINE_NEED_RATE: f32 = 0.05f32;
+pub const BOX_LINE_UNIT_COST: f32 = 172.41f32;
 
 pub fn ben_boxline_save(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     //print!("====  BOX : ");
@@ -769,13 +769,13 @@ pub fn ben_boxline_save(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     BenProj { proj }
 }
 
-const METER_PER_WORKER: f32 = 5825f32;
-const WORKER_MONTH_SALARY: f32 = 35_000f32;
-const WORKER_BONUS_MONTH: f32 = 1f32;
-const WORKER_SAVING_RATE: f32 = 0.03f32;
-const WORKER_SOC_SEC_RATE: f32 = 0.05f32;
-const WORKER_REDUCE_RATE: f32 = 0.25f32;
-const SALARY_INCR_RATE: f32 = 0.04f32;
+pub const METER_PER_WORKER: f32 = 5825f32;
+pub const WORKER_MONTH_SALARY: f32 = 35_000f32;
+pub const WORKER_BONUS_MONTH: f32 = 1f32;
+pub const WORKER_SAVING_RATE: f32 = 0.03f32;
+pub const WORKER_SOC_SEC_RATE: f32 = 0.05f32;
+pub const WORKER_REDUCE_RATE: f32 = 0.25f32;
+pub const SALARY_INCR_RATE: f32 = 0.04f32;
 
 pub fn ben_work_save(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     //print!("====  WORKER : ");
@@ -800,9 +800,9 @@ pub fn ben_work_save(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     BenProj { proj }
 }
 
-const METER_SELLABLE_RATE: f32 = 0.33f32;
-const M3P_SELL_PRICE: f32 = 100f32;
-const M1P_SELL_PRICE: f32 = 50f32;
+pub const METER_SELLABLE_RATE: f32 = 0.33f32;
+pub const M3P_SELL_PRICE: f32 = 100f32;
+pub const M1P_SELL_PRICE: f32 = 50f32;
 
 pub fn ben_sell_meter(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     //print!("====  SELL METER");
@@ -822,16 +822,16 @@ pub fn ben_sell_meter(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     BenProj { proj }
 }
 
-const EMTR_CNT_RATIO: f32 = 0.05f32;
-const EMTR_SWAP_RATE: f32 = 0.1f32;
-const EMTR_REPL_RATE: f32 = 0.02f32;
-const EMTR_1P_COST: f32 = 525f32;
-const EMTR_3P_COST: f32 = 1_285f32;
-const EMTR_1P_SWAP: f32 = 100f32;
-const EMTR_3P_SWAP: f32 = 200f32;
-const EMTR_1P_REPL: f32 = 250f32;
-const EMTR_3P_REPL: f32 = 400f32;
-const EMTR_COST_UP: f32 = 0.02f32;
+pub const EMTR_CNT_RATIO: f32 = 0.05f32;
+pub const EMTR_SWAP_RATE: f32 = 0.1f32;
+pub const EMTR_REPL_RATE: f32 = 0.02f32;
+pub const EMTR_1P_COST: f32 = 525f32;
+pub const EMTR_3P_COST: f32 = 1_285f32;
+pub const EMTR_1P_SWAP: f32 = 100f32;
+pub const EMTR_3P_SWAP: f32 = 200f32;
+pub const EMTR_1P_REPL: f32 = 250f32;
+pub const EMTR_3P_REPL: f32 = 400f32;
+pub const EMTR_COST_UP: f32 = 0.02f32;
 
 pub fn ben_emeter(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     //print!("====  EMETER");
@@ -857,8 +857,8 @@ pub fn ben_emeter(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     BenProj { proj }
 }
 
-const MT_READ_COST: f32 = 6.2f32;
-const READ_COST_UP: f32 = 0.04f32;
+pub const MT_READ_COST: f32 = 6.2f32;
+pub const READ_COST_UP: f32 = 0.04f32;
 
 pub fn ben_mt_read(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     //print!("====  READING");
@@ -900,12 +900,12 @@ pub fn ben_mt_disconn(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     BenProj { proj }
 }
 
-const TOU_METER_RATIO: f32 = 0.2;
-const TOU_SELLABLE_RATE: f32 = 0.3f32;
+pub const TOU_METER_RATIO: f32 = 0.2;
+pub const TOU_SELLABLE_RATE: f32 = 0.3f32;
 //const TOU_1P_RATIO: f32 = 0.74f32;
 //const TOU_3P_RATIO: f32 = 0.26f32;
-const TOU_1P_SELL_PRICE: f32 = 350f32;
-const TOU_3P_SELL_PRICE: f32 = 857f32;
+pub const TOU_1P_SELL_PRICE: f32 = 350f32;
+pub const TOU_3P_SELL_PRICE: f32 = 857f32;
 
 pub fn ben_tou_sell(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     //print!("====  SELL METER");
@@ -925,8 +925,8 @@ pub fn ben_tou_sell(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     BenProj { proj }
 }
 
-const TOU_READ_COST: f32 = 18f32;
-const TOU_COST_UP: f32 = 0.04f32;
+pub const TOU_READ_COST: f32 = 18f32;
+pub const TOU_COST_UP: f32 = 0.04f32;
 
 pub fn ben_tou_read(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     //print!("====  TOU READ");
@@ -945,7 +945,7 @@ pub fn ben_tou_read(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     BenProj { proj }
 }
 
-const TOU_UPDATE_COST: f32 = 200f32;
+pub const TOU_UPDATE_COST: f32 = 200f32;
 
 pub fn ben_tou_update(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     //print!("====  TOU UPDATE");
@@ -964,8 +964,8 @@ pub fn ben_tou_update(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     BenProj { proj }
 }
 
-const OUT_MT_HOUR_YEAR: f32 = 0.0011f32; // 125/116000
-const LABOR_COST_HOUR: f32 = 2_000f32;
+pub const OUT_MT_HOUR_YEAR: f32 = 0.0011f32; // 125/116000
+pub const LABOR_COST_HOUR: f32 = 2_000f32;
 
 pub fn ben_outage_labor(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     //print!("====  OUTAGE LABOR");
@@ -982,8 +982,8 @@ pub fn ben_outage_labor(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     BenProj { proj }
 }
 
-const CALL_CENTER_COST_MT: f32 = 3.33f32;
-const CALL_CENTER_COST_UP: f32 = 0.04f32;
+pub const CALL_CENTER_COST_MT: f32 = 3.33f32;
+pub const CALL_CENTER_COST_UP: f32 = 0.04f32;
 
 pub fn ben_reduce_complain(sbtr: &SubCalc, _ben: &SubBenInfo) -> BenProj {
     //print!("====  COMPLAIN");
@@ -1044,8 +1044,8 @@ pub fn ben_asset_value(sbtr: &SubCalc, ben: &SubBenInfo) -> BenProj {
     BenProj { proj }
 }
 
-const MODEL_ENTRY_RATIO: f32 = 0.05f32;
-const MODEL_ENTRY_COST: f32 = 2000f32;
+pub const MODEL_ENTRY_RATIO: f32 = 0.05f32;
+pub const MODEL_ENTRY_COST: f32 = 2000f32;
 
 pub fn ben_model_entry(sbtr: &SubCalc, ben: &SubBenInfo) -> BenProj {
     //print!("====  MODEL ENTRY");
